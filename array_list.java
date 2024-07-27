@@ -1,18 +1,24 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+class myexception extends  Exception{
+    public String toString(){
+        return "Please enter valid input (Enter a postive values";
+    }
+}
 public class array_list{
     static int j;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws myexception  {
        ArrayList<Integer> al = new ArrayList<>();
-       
        Scanner sc = new Scanner(System.in);
        System.out.print("Enter the size of Array : ");
-       int size = sc.nextInt();   
+       int size = sc.nextInt(); 
+       if(size<=0){
+        throw new myexception();
+       }  
        boolean i = true;
        while(i){
-        System.out.print("enter the array :");
-        int k = sc.nextInt();
+        System.out.print("enter the Element :");
+            int k = sc.nextInt();
         al.add(k);
        if(al.size()==size){
         i = false;
@@ -24,7 +30,7 @@ public class array_list{
     }
     boolean t= true;
     while(t){ 
-    System.out.println("\n");
+    System.out.println(" ");
     System.out.println("What you want to do ");
     System.out.println("1. Remove element");
     System.out.println("2. Add elements");
@@ -32,7 +38,8 @@ public class array_list{
     System.out.println("4. Find element with index ");
     System.out.println("5. Set the element with index");
     System.out.println("6. Show the Array");
-    System.out.println("7. Exit");
+    System.out.println("7. Remove all elements ");
+    System.out.println("8. Exit");
     System.out.print("Enter your choice : ");
     int s = sc.nextInt();
     switch (s) {
@@ -71,6 +78,7 @@ public class array_list{
                     System.out.println(s33);
                     break;
                 }
+                break;
         case 4:
                 System.out.print("Enter the index to find element : ");
                 int s41 = sc.nextInt();
@@ -80,6 +88,7 @@ public class array_list{
                 System.out.println(s42);
                 break;
         case 5:
+        try{ 
                System.out.print("Enter the index to replace value : ");
                int s51 = sc.nextInt();
                System.out.print("Enter the Element to insert : ");
@@ -90,19 +99,33 @@ public class array_list{
                for(int j=0 ;j<al.size();j++){
                    System.out.print(al.get(j) + " ");
                     }
+                }
+                 catch (Exception e) {
+                    System.out.println("please add element beacause its thow exception");
+                    System.out.println(e);
+                }
                break;
 
         case 6:
         System.out.print("The Array list is : "); 
         for(int j=0 ;j<al.size();j++){
             System.out.print(al.get(j) + " ");
-             }
-        break;
             
+             }
+             if(al.isEmpty()){
+                System.out.println("Empty");
+            }
+        break; 
         case 7 :
+        System.out.println("Removed all elements successfully ");
+        al.removeAll(al);
+        break;
+        case 8 :
         System.out.println("Exit successfully");
             t = false;
             break;
+        default:
+        System.out.println("Error (make sure you enter valid input)");
 
     }
 }
